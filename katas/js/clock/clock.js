@@ -1,5 +1,5 @@
 /*
-Programa que retorna el el tiempo que ha pasado desde
+Programa que retorna el tiempo que ha pasado desde
 la medianoche en milisegundos.
 
 TODO finalizarlo con interfaz y demás
@@ -7,31 +7,40 @@ TODO finalizarlo con interfaz y demás
 
 */
 
-let horas = 0;
-let minutos = 1;
-let segundos = 1;
+//Datos de entrada
+let hours = 0;
+let minutes = 1;
+let seconds = 1;
 
-//Constante que almacena una función
-const tiempoPasadoDesdeLaMedianoche = (horas, minutos, segundos) => {
-  let resultado;
+/**
+ * Calcula el tiempo que pasó desde la media noche
+ * @param {*} hours
+ * @param {*} minutes
+ * @param {*} seconds
+ * @returns
+ */
+const timeSinceMidnight = (hours, minutes, seconds) => {
+  let results;
 
   try {
+    //Valida
     if (
-      horas >= 0 &&
-      horas < 23 &&
-      minutos >= 0 &&
-      segundos < 59 &&
-      segundos >= 0 &&
-      segundos < 59
+      hours >= 0 &&
+      hours < 23 &&
+      minutes >= 0 &&
+      seconds < 59 &&
+      seconds >= 0 &&
+      seconds < 59
     ) {
-      //Paso todo a milisegundos
-      horas = horas * 3600000;
-      minutos = minutos * 60000;
-      segundos = segundos * 1000;
+      //Convierte a milisegundos
+      hours = hours * 3600000;
+      minutes = minutes * 60000;
+      seconds = seconds * 1000;
 
-      resultado = horas + minutos + segundos;
+      //Total de milisegundos
+      results = hours + minutes + seconds;
 
-      return resultado + " ms";
+      return results + " ms";
     } else {
       console.log("Introduzca datos correctos");
       return null;
@@ -43,5 +52,7 @@ const tiempoPasadoDesdeLaMedianoche = (horas, minutos, segundos) => {
   }
 };
 
-//Ejecutar función
-console.log(tiempoPasadoDesdeLaMedianoche(0, 1, 1));
+//Ejecuta la función
+console.log(
+  "Han pasado " + timeSinceMidnight(0, 1, 1) + " desde la medianoche",
+);
