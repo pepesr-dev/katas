@@ -5,6 +5,7 @@
  * @param {*} owner Nombre del propietario
  * @returns string
  */
+
 const personalizedMessage = (name, owner) => {
   if (name == owner) {
     return "hello boss";
@@ -12,4 +13,5 @@ const personalizedMessage = (name, owner) => {
     return "hello guest";
   }
 };
+
 console.log(personalizedMessage("lenia", "pepe"));
