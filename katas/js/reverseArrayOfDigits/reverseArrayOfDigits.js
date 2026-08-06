@@ -6,7 +6,8 @@
  */
 const reverseArrayOfDigits = (num) => {
   //Convierte el número en un string
-  let string = num.toString();
+  let string = "";
+  string = num.toString();
 
   let reverseArrayOfDigits = [];
 

@@ -5,7 +5,6 @@
  * @param {*} owner Nombre del propietario
  * @returns string
  */
-
 const personalizedMessage = (name, owner) => {
   if (name == owner) {
     return "hello boss";
