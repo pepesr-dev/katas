@@ -7,15 +7,8 @@
 //no numeros
 //nunca vacío
 
-let word = "pepe";
-
-const calcWordValue = () => {
-  let wordValue;
-  let word = "";
-  //validar entrada
-  //sacar cada caracter
-
-  let alphabet = [
+const calcWordValue = (string) => {
+  const alphabet = [
     "a",
     "b",
     "c",
@@ -43,17 +36,44 @@ const calcWordValue = () => {
     "y",
     "z",
   ];
+  //validar entrada
 
-  //recorrer la palabra, sacar cada letra, comparar con la posición en el array
-  for (let i = 1; i < word.length; i++) {
-    let wordCharacter = "";
-    wordCharacter = word[n];
-    console.log(wordCharacter);
+  try {
+    //---Limpieza y validación de entradas
+    //Limpiar espacios
+    string = string.replace(/\s+/g, "");
+    //Valida que la entrada no esté vacía
+    if (string.length === 0) {
+      return "Error: La entrada no puede estar vacía.";
+    }
+    if (/\d/.test(string)) {
+      return "Error: La entrada no puede contener números.";
+    }
+
+    //---Lógica, Calcula el valor de la cadena introducida
+    let characterValueSum = 0;
+
+    //Recorre la cadena para obtener la posición de cada
+    //caracter y realizar la suma
+    for (let i = 0; i < string.length; i++) {
+      let wordCharacter = "";
+
+      //Obtiene cada caracter de la cadena
+      wordCharacter = string.charAt(i);
+
+      //Obtiene la posición y suma el valor de cada caracter +1
+      //a = 0 -> a + 1  = 1 Posición -> z = 26 posición
+      characterValueSum += alphabet.indexOf(wordCharacter) + 1;
+    }
+
+    return characterValueSum;
+  } catch (error) {
+    console.error("Error en la función calcWordValue: " + error);
   }
-  //todo sacar letras y comparar posición
-  //asignar valor a cada caracter
-
-  //sumarlos
-  //retornar resultado
-  return worlValue;
 };
+
+console.log(calcWordValue("alvaro")); //69
+console.log(calcWordValue("  ")); //54
+console.log(calcWordValue("love")); //54
+console.log(calcWordValue("lov3")); //54
+console.log(calcWordValue("friendship")); //108
