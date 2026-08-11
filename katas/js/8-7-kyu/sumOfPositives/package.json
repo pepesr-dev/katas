@@ -1,0 +1,18 @@
+{
+  "name": "sumofpositives",
+  "version": "1.0.0",
+  "description": "Task You get an array of numbers, return the sum of all of the positives ones.",
+  "main": "sumOfPositives.js",
+  "scripts": {
+    "test": "jest",
+    "doc": "jsdoc sumOfPositives.js -d docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jsdoc": "^4.0.5"
+  }
+}
