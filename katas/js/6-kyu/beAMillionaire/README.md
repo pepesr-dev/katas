@@ -43,7 +43,9 @@ Players taking calculated risk - 100 random tests
 Players taking low risk - 100 random tests
 Random players - 300 random tests
 There will be no invalid inputs; all players make valid decisions
-**NO entiendo**
+**Pruebas que codewars hará a mi código**  
+Son tipos de jugadores y estrategias que usaran.
+Estas pruebas pretenden evaluar el rendimiento de mi codigo (velocidad y robustez).
 ---
 
 ## Game Setup
@@ -85,3 +87,5 @@ After each n'th question, n being divisible by 5 **(5th, 10th, 15th question)**,
 Good luck, have fun
 
 #Arrays #Games #Logic
+
+
