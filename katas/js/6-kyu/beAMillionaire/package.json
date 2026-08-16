@@ -1,0 +1,22 @@
+{
+  "name": "beamillionaire",
+  "version": "1.0.0",
+  "description": "Everybody wants to become a millionaire, don't you? In this kata, we'll evaluate a game of \"Who Wants to Be A Millionaire?\"",
+  "main": "beAMillionaire.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest",
+    "doc": "jsdoc beAMillionaire.js -d docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
+    "jsdoc": "^4.0.5"
+  }
+}

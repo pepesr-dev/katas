@@ -89,3 +89,9 @@ Good luck, have fun
 #Arrays #Games #Logic
 
 
+
+```
+function getTotalCashPrize(prizeFund, correctAnswers, playerActions) {
+  return 0;
+}
+```
