@@ -32,9 +32,9 @@ prizeFund = [
 playerActions = [
   "a",
   "b",
-  "c",
+  "2c",
   "d",
-  "b",
+  "w",
   "c",
   "d",
   "b",
@@ -81,14 +81,41 @@ playerActions = ["a", "b", "d", "d", "d", "a"];
  */
 function getTotalCashPrize(prizeFund, correctAnswers, playerActions) {
   let total = 0;
-  let wastedLifeLines = 0;
+  let playerAnswers = [];
+  let wastedLifeLines = [];
   let output = [];
 
-  for (let i = 0; i < playerActions.length; i++) {}
+  //*Limpiar numeros
+  playerAnswers = playerActions.map((action) => action.replace(/\d/g, ""));
 
-  total = 2000;
-  wastedLifeLines = 3;
-  output = [total, wastedLifeLines];
+  wastedLifeLines = playerActions.map((action) => action.replace(/\D/g, ""));
+
+  //*CAMINO FELIZ
+  //playerActions solo contiene respuestas
+  //*correctas e incorrectas
+  for (
+    let i = 0;
+    i < playerAnswers.length &&
+    playerAnswers[i] == correctAnswer[i] &&
+    playerActions != "x" &&
+    playerActions != "w";
+    i++
+  ) {
+    //Obtiene el premio correspondiente
+    total = prizeFund[i];
+
+    //*Busco el punto seguro
+    if (playerActions[i + 1] == "x") {
+      total = prizeFund[i];
+    }
+  }
+
+  //total = 2000;
+
+  let totalWastedLifeLines = 0;
+
+  totalWastedLifeLines = wastedLifeLines.join("").length;
+  output = [total, totalWastedLifeLines];
   return output;
 }
 console.log(getTotalCashPrize(prizeFund, correctAnswer, playerActions));
