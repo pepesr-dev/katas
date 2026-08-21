@@ -1,35 +1,36 @@
 const getTotalCashPrize = require("./beAMillionaire");
 
+const originalPrizeFund = [
+  100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000,
+  250000, 500000, 1000000,
+];
+const exampleCorrectAnswers = [
+  "A",
+  "B",
+  "B",
+  "D",
+  "B",
+  "C",
+  "A",
+  "A",
+  "B",
+  "D",
+  "D",
+  "D",
+  "B",
+  "C",
+  "B",
+];
+
 describe("Función getTotalCashPrize", () => {
-  test("Debe comprobar que la función falla", () => {
-    expect(
-      getTotalCashPrize(
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-      ),
-    ).toBe(1);
-  });
-
   test("Debe comprobar que la función funciona", () => {
-    expect(
-      getTotalCashPrize(
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-      ),
-    ).toBe(0);
-  });
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["A", "B", "B"];
+    const expected = [600, 0];
 
-  /*
-    test("Debe comprobar que 0 es un número par y devolver Even", () => {
-    expect(getTotalCashPrize(0)).toBe("Even");
+    expect(getTotalCashPrize(prizeFund, correctAnswers, playerActions)).toBe(
+      expected,
+    );
   });
-  test("Debe comprobar que 1 es un número impar y devolver Odd", () => {
-    expect(getTotalCashPrize(1)).toBe("Odd");
-  });
-  test("Debe comprobar que -1 es un número impar y devolver Odd", () => {
-    expect(getTotalCashPrize(-1)).toBe("Odd");
-  });
-*/
 });
