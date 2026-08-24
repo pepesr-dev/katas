@@ -24,7 +24,7 @@ const exampleCorrectAnswers = [
 ];
 
 describe("Función getTotalCashPrize", () => {
-  test("Debe comprobar que la función funciona", () => {
+  test("Comprueba que obtiene premios", () => {
     const prizeFund = originalPrizeFund;
     const correctAnswers = exampleCorrectAnswers;
     const playerActions = ["A"];
@@ -34,11 +34,71 @@ describe("Función getTotalCashPrize", () => {
       getTotalCashPrize(prizeFund, correctAnswers, playerActions),
     ).toStrictEqual(expected);
   });
-  test("Debe comprobar que la función acumula", () => {
+
+  //Prueba de derrora
+  test("Comprueba que una respuesta incorrecta termina el juego", () => {
     const prizeFund = originalPrizeFund;
     const correctAnswers = exampleCorrectAnswers;
-    const playerActions = ["A", "B"];
-    const expected = [300, 0];
+    const playerActions = ["D", "B"];
+    const expected = [0, 0];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+  test("Comprueba que acumulan todos los premios", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = [
+      "A",
+      "B",
+      "B",
+      "D",
+      "B",
+      "C",
+      "A",
+      "A",
+      "B",
+      "D",
+      "D",
+      "D",
+      "B",
+      "C",
+      "B",
+    ];
+    const expected = [2003100, 0];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+
+  //ACUMULAR COMODINES
+  test("Debe comprobar que acumula un solo comodin", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["1A"];
+    const expected = [100, 1];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+  test("Debe comprobar que acumula comodines en diferentes preguntas", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["1A", "23B"];
+    const expected = [300, 3];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+  test("Debe comprobar que se acumulan todos los comodines", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["123A"];
+    const expected = [100, 3];
 
     expect(
       getTotalCashPrize(prizeFund, correctAnswers, playerActions),

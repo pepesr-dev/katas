@@ -2,23 +2,48 @@
 
 /**
  *
- * @param {Array} prizeFund
- * @param {Array} correctAnswers
- * @param {Array} playerActions
- * @returns {Array} [totalCashPrize, wastedLifeLines] || [0, wastedLifeLines]
+ * @param {Array} prizeFund - Lista de premios (se acumulan)
+ * @param {Array} correctAnswers - Plantilla de respuestas correctas
+ * @param {Array} playerActions - Acciones del jugador
+ * @returns {Array} [totalCashPrize, wastedLifeLines]
  */
 function getTotalCashPrize(prizeFund, correctAnswers, playerActions) {
   let totalCashPrize = 0;
   let wastedLifeLines = 0;
+  let safeHaven = 0;
   let i = 0;
+
+  //Recorre las acciones del jugador
   for (i; i < playerActions.length; i++) {
+    //Extrae la primera acción
+    /**
+     * @type {string}
+     */
     const action = playerActions[i];
+    //->a
+    /**
+     * @type {string}
+     */
     const digits = action.replace(/\D/g, "");
-
+    //->123
+    /**
+     * @type {string}
+     */
     wastedLifeLines += digits.length;
+    /**
+     * @type {string}
+     */
     const decision = action.replace(/\d/g, "").toUpperCase();
+    //->A
 
+    //w
+    //x
+    //saveHaven
+
+    //Acumula el premio y reduce a 0 si la
+    // respuesta es incorrecta
     if (decision == correctAnswers[i]) {
+      //->D
       totalCashPrize += prizeFund[i];
     } else {
       return [0, wastedLifeLines];
@@ -29,21 +54,21 @@ function getTotalCashPrize(prizeFund, correctAnswers, playerActions) {
 }
 
 correctAnswers = [
-  "d",
-  "b",
-  "d",
-  "d",
-  "b",
-  "a",
-  "d",
-  "b",
-  "c",
-  "a",
-  "b",
-  "w",
-  "a",
-  "b",
-  "c",
+  "A",
+  "B",
+  "B",
+  "D",
+  "B",
+  "C",
+  "A",
+  "A",
+  "B",
+  "D",
+  "D",
+  "D",
+  "B",
+  "C",
+  "B",
 ];
 
 //Colección de 15 premios
@@ -53,23 +78,25 @@ prizeFund = [
 ];
 
 playerActions = [
-  "d",
-  "b",
-  "d",
-  "d",
-  "b",
-  "a",
-  "d",
-  "b",
-  "c",
-  "a",
-  "b",
-  "w",
-  "a",
-  "b",
-  "c",
+  "1A",
+  "23B",
+  "B",
+  "D",
+  "B",
+  "C",
+  "A",
+  "A",
+  "B",
+  "D",
+  "D",
+  "D",
+  "B",
+  "C",
+  "B",
 ];
 
-getTotalCashPrize(prizeFund, correctAnswers, playerActions);
+console.log(getTotalCashPrize(prizeFund, correctAnswers, playerActions));
+
+//->Acumula correctas
 
 module.exports = getTotalCashPrize;
