@@ -74,7 +74,7 @@ describe("Función getTotalCashPrize", () => {
   });
 
   //ACUMULAR COMODINES
-  test("Debe comprobar que acumula un solo comodin", () => {
+  test("Comprueba que acumula un solo comodin", () => {
     const prizeFund = originalPrizeFund;
     const correctAnswers = exampleCorrectAnswers;
     const playerActions = ["1A"];
@@ -84,7 +84,7 @@ describe("Función getTotalCashPrize", () => {
       getTotalCashPrize(prizeFund, correctAnswers, playerActions),
     ).toStrictEqual(expected);
   });
-  test("Debe comprobar que acumula comodines en diferentes preguntas", () => {
+  test("Comprueba que se acumulan comodines en diferentes preguntas", () => {
     const prizeFund = originalPrizeFund;
     const correctAnswers = exampleCorrectAnswers;
     const playerActions = ["1A", "23B"];
@@ -94,11 +94,90 @@ describe("Función getTotalCashPrize", () => {
       getTotalCashPrize(prizeFund, correctAnswers, playerActions),
     ).toStrictEqual(expected);
   });
-  test("Debe comprobar que se acumulan todos los comodines", () => {
+
+  test("Comprueba que se acumulan todos los comodines", () => {
     const prizeFund = originalPrizeFund;
     const correctAnswers = exampleCorrectAnswers;
     const playerActions = ["123A"];
     const expected = [100, 3];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+
+  //Comprobar funciones W, X, saveHaven
+
+  test("Comprueba que la acción W, termina el juego y el jugador recibe lo acumulado", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["1A", "23B", "w"];
+    const expected = [300, 3];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+
+  //Comprueba saveHaven y X
+  test("Comprueba que la acción X, termina el juego y el jugador recibe la cantidad correspondiente al saveHaven 5", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = ["A", "B", "B", "D", "B", "X"];
+    const expected = [2100, 0];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+
+  test("Comprueba que la acción X, termina el juego y el jugador recibe la cantidad correspondiente al saveHaven 10", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = [
+      "A",
+      "B",
+      "B",
+      "D",
+      "B",
+      "C",
+      "A",
+      "A",
+      "B",
+      "D",
+      "D",
+      "D",
+      "X",
+    ];
+    const expected = [64100, 0];
+
+    expect(
+      getTotalCashPrize(prizeFund, correctAnswers, playerActions),
+    ).toStrictEqual(expected);
+  });
+
+  //Tests adicionales fallados en codewars
+  test("Comprueba que acciona x en la 7 pregunta, y recibe lo acumulado en el saveHaven ", () => {
+    const prizeFund = originalPrizeFund;
+    const correctAnswers = exampleCorrectAnswers;
+    const playerActions = [
+      "A",
+      "B",
+      "B",
+      "D",
+      "B",
+      "C",
+      "X",
+      "A",
+      "B",
+      "D",
+      "D",
+      "D",
+      "B",
+      "C",
+      "B",
+    ];
+    const expected = [2100, 0];
 
     expect(
       getTotalCashPrize(prizeFund, correctAnswers, playerActions),

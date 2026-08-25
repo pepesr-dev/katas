@@ -1,97 +1,105 @@
 # Who Wants to Be a Millionaire?
-## Description:
-### Introduction
-Everybody wants to become a millionaire, don't you? In this kata, we'll evaluate a game of "Who Wants to Be A Millionaire?"
+Esta librería contiene una función para calcular el premio total que recibe el jugador que participa en el juego "Who Wants to Be Millionaire?".
 
-*Note that we use a custom game format in this kata!*
+*"No hay preguntas, solo se pasan las acciones del jugador a cada ronda. Estas se comparan con la plantilla de respuestas correctas y calcula el premio que recibe por cada pregunta correcta, a menos que falle algula pregunta o utilice las acciones de huída("W") o parada("X").
+Los comodines solo se cuentan, para saber cuantos han sido utilizados"*
 
----
+- **Total de preguntas**: 15.
+- **Los premios se acumulan**: [100,200] = 300
+- **Puntos de guardado**(saveHaven): Pregunta 5 y 10.
+- **Opciones de respuesta**: ["A","B","C","D"]
+- **Comodines disponibles**: 
+  - 50/50
+  - Phone a friend
+  - Ask the audience
+- **Acciones**: 
+  - **Huída**(Antes de ver la siguiente pregunta): "W", el jugador decide terminar el juego con lo acumulado hasta el momento.
+  - **Parada**(Después de ver la pregunta): "X", el jugador se arriesga y decide ver la siguiente pregunta pero no la sabe y decide retirarse con almacenado en el punto de guardado.
+- **La función recibe**:
+  - Lista de 15 premios: prizeFund = [100,200,...] 
+  - Plantilla de respuestas correctas: correctAnswers = ["A","B"]
+  - Acciones del jugador: playerActions = ["A","123B","X||W"]
+## 🚀 Funcionalidades Principales
+- Calcular premio total.
+- Calcular el premio total tras retirarse antes de leer la pregunta("W").
+- Calcular el premio total tras leer la pregunta("X").
+- Almacenar el premio acumulado en los puntos seguros (saveHaven)
 
-## Task
-Calculate the **total cash** prize a player earned while playing a game of "Who Wants to Be A Millionaire?", given the prize fund for each question, the correct answers, and the actions the player made during the game.
+## 💻 Ejemplo de Uso Técnico
 
+```javascript
 
+correctAnswers = [
+  "A",
+  "B",
+  "B",
+  "D",
+  "B",
+  "C",
+  "A",
+  "A",
+  "B",
+  "D",
+  "D",
+  "D",
+  "B",
+  "C",
+  "B",
+];
 
-## Input
-**prize fund**: an array containing 15 integers, each being the prize fund for the corresponding question. 
-**For instance**: [100, 200, 300, 400, 800, ...] **Premio en euros**
-**correct answers**: an array containing 15 letters, each being the correct answer for the corresponding question. The letters represent each of the four possible **answers**:"A", "B", "C", "D" **Posibles respuestas**
-
-**player actions**: an array containing at most 15 strings (less if game ended earlier), each being one or more actions the player made for the corresponding question. Actions the player can take: **Log de respuestas del usuario**
-**Answer a question**: "A", "B", "C", "D"
-**Walk away before the host asks** the next question: "W"
-**Stop after the hosts asks** a question, without answering: "X"
-**In addition**, the player can use zero, one or more life lines, these are prepended to the player action: "1A", "23X", "3B", ... **Salva vidas/comodines**
-**Possible life lines**:
-"1" 50/50
-"2" Phone a Friend
-"3" Ask the Audience
-
-
-
-# TODO ---
-
-
-
-## Output
-Return an array/tuple of 2 integers, the first integer being the total cash prize the player earned playing the game, and the second integer being the total amount of life lines used: example [20000, 1] player earned 20000 total cash prize and used 1 lifeline.
-[total,salvaVidasUsados] -> [100,3]
-
-## Input Constraints
-Players addicted to risk - 100 random tests
-Players taking calculated risk - 100 random tests
-Players taking low risk - 100 random tests
-Random players - 300 random tests
-There will be no invalid inputs; all players make valid decisions
-**Pruebas que codewars hará a mi código**  
-Son tipos de jugadores y estrategias que usaran.
-Estas pruebas pretenden evaluar el rendimiento de mi codigo (velocidad y robustez).
----
-
-## Game Setup
-Perfect Scenario
-The game is played by a **single player**, who's task is to answer questions asked by the host. There is a total of **15 questions** to answer, each having a prize fund attached. For each question answered correctly, the player accumulates the prize fund to his total cash prize so far. If all questions are answered correctly, the player wins the maximum amount of cash prize.
-
-### Options the player has **before proceeding** with the next question
-
-**Before each question (even the first)**, the host asks the player if they want to proceed with the question. The player has two options:
-
-The player can choose to **walk away** (player action: "W"), in which case the player **leaves the game with the total amount** of cash prize collected so far.
-
-**The player can choose to proceed**, in which case the host continues with asking the question.
-
-### Options the player has after the host asks a question
-**After each question**, the player is given the **choice** to either answer the question or **stop**. However, **since the question has already been asked**, there is no longer an option to walk away with the total cash prize collected so far. Four possible answers are presented to the player. Here are the **options**:
-1. The **player can choose to stop** (player action: "X"), in which case the **player leaves the game with the amount of cash collected** at the last safe haven (explained below).
-2. The player can choose to **answer the question**, in which case the player has to pick one of the four possible answers (player action: **"A", "B", "C", "D" (pick one)**), after which the host says whether the answer is **correct or not.**
+//Colección de 15 premios
+prizeFund = [
+  100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000,
+  250000, 500000, 1000000,
+];
 
 
-### Additional options the player has after the host asks a question
-Before making a final decision after the host asked a question (stop vs answer), the player can choose to use **any or all of his remaining life lines** (prepended to current player action: "1", "2", "3" (pick 0, 1 or more)).
+playerActions = [
+  "A",
+  "B",
+  "12B",
+  "D",
+  "B",
+  "C",
+  "X",
+  "A",
+  "B",
+  "D",
+  "D",
+  "D",
+  "B",
+  "C",
+  "B",
+];
 
+console.log(getTotalCashPrize(prizeFund, correctAnswers, playerActions));
 
-**Life Lines available to the player**
-The player has 3 life lines available for the entire game of 15 questions. The player can use any number of these life lines or none at all. Each life line can only be used once, and there is no additional restriction on the number of life lines used per question. The life lines are:
-
-**50/50:** The host takes away two of the possible answers, which are definitely incorrect.
-**Phone a Friend:** The player is allowed to phone a friend and discuss the possible answers with that friend.
-**Ask the Audience:** The audience can vote on which possible answer they think is correct. The player can take into account the voting results.
-The player gives an incorrect answer
-
-If the player decided to answer the question, and gives a **wrong answer**, the player is eliminated, and leaves the game without any prize cash!
-
-
-## What is a safe haven?
-After each n'th question, n being divisible by 5 **(5th, 10th, 15th question)**, the total cash prize collected so far is marked as the safe haven. As explained earlier, when a player stops after the host asked a question, they can **collect the amount of cash prize marked at the most recent safe haven.**
-
-Good luck, have fun
-
-#Arrays #Games #Logic
-
-
-
+// Salida esperada: [2100, 2] (Suma acumulada hasta la ronda 6 debido a la retirada 'X')
 ```
-function getTotalCashPrize(prizeFund, correctAnswers, playerActions) {
-  return 0;
-}
-```
+
+## 🛠️ Instalación y Pruebas
+
+1. Descarga el repositorio de katas:
+   ```bash
+   git clone https://github.com
+   ```
+2. Accede al directorio de la solución:
+   ```bash
+   cd katas/katas/js/6-kyu/beAMillionaire
+   ```
+3. Ejecuta la suite de pruebas unitarias automatizadas (Jest):
+   ```bash
+   npm test
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
