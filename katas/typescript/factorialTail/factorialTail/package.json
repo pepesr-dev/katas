@@ -1,0 +1,23 @@
+{
+  "name": "factorialtail",
+  "version": "1.0.0",
+  "description": "Devuelve la cantidad de ceros al final de un numero factorial",
+  "main": "./src/factorialTail.ts",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "docs": "typedoc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.4.0",
+    "jest": "^30.5.0",
+    "ts-jest": "^29.4.12",
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.28.20",
+    "typescript": "^6.0.3"
+  }
+}
