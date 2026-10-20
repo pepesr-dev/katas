@@ -45,14 +45,4 @@ describe('example tests', function() {
 });
 ```
 
-## Requisitos previos
-Node.js
-
-## Iniciar
-- Descarga el repositorio: `gh repo clone pepesr-dev/katas`
-- Entra en la carpeta específica de la app: `cd katas/katas/js/..`
-- Ejecutar la función: `node whoLikesIt.js`
-
-## Contribuciones
-Esta app no acepta contribuciones.
 
