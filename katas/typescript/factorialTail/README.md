@@ -23,7 +23,7 @@ Unfortunately, **machine integer numbers** has not enough precision for larger v
 ### Your task
 is to write a function, which will find the number of zeroes at the end of (number) factorial **in arbitrary radix = base** for larger numbers.
 
-- Escibir una función que lo haga
+- Escibir una función que lo haga para cualquier base
 
 **base** is an integer from 2 to 256
 **number** is an integer from 1 to 1'000'000
