@@ -1,45 +1,57 @@
 /**
- * Calcula la cantidad de ceros al final del factorial de un número
- * @param base - Base numérica (10 ó 16)
- * @param num - Numero entero al cual se le aplicará el calculo
+ * Calcula la cantidad de ceros al final del factorial de un número en una base dada.
+ * @param base - Base numérica (entero entre 2 y 256)
+ * @param num - Número entero al cual se le aplicará el cálculo (entre 1 y 1'000'000)
  * @returns Número de ceros al final o mensaje de error
  */
 export const zeroes = (base: number, num: number): Number | string => {
-  let zeroes = 0;
-  //Validación de entradas
+  // Validación de tipos y rangos
   if (
-    Number.isNaN(base) ||
     typeof base !== "number" ||
-    Number.isNaN(num) ||
-    typeof num !== "number"
+    typeof num !== "number" ||
+    !Number.isInteger(base) ||
+    !Number.isInteger(num) ||
+    base < 2 ||
+    base > 256 ||
+    num < 1 ||
+    num > 1_000_000
   ) {
-    return "Error: La base debe ser (10 ó 16) y num solo admite numeros";
+    return "Error: base debe ser un entero entre 2 y 256 y num un entero entre 1 y 1'000'000";
   }
-  //Interruptor
-  switch (base) {
-    //Base 10
-    case 10:
-      while (num >= 5) {
-        num = Math.floor(num / 5);
-        zeroes += num;
-      }
-      return zeroes;
-      break;
-    //Base 16
-    case 16:
-      let factoresDeDos = 0;
-      let divisor = 2;
-      while (num >= divisor) {
-        factoresDeDos += Math.floor(num / divisor);
-        divisor *= 2;
-      }
-      //Cada 4 factores 2 se forma un 16 (es decir suma un cero)
-      zeroes = Math.floor(factoresDeDos / 4);
-      return zeroes;
-      break;
-    default:
-      return 0;
+
+  // Saca los primos de la base
+  const primos: number[] = [];
+  let restante = base;
+  let divisor = 2;
+
+  while (divisor * divisor <= restante) {
+    while (restante % divisor === 0) {
+      primos.push(divisor);
+      restante /= divisor;
+    }
+    divisor++;
   }
+  if (restante > 1) primos.push(restante);
+
+  //Saca los primos de num y calcula la cantidad de ceros al final
+  let minCeros = num;
+
+  for (const primo of primos) {
+    let totalPrimo = 0;
+    let actual = num;
+
+    while (actual >= primo) {
+      actual = Math.floor(actual / primo);
+      totalPrimo += actual;
+    }
+
+    const repeticionesEnBase = primos.filter((p) => p === primo).length;
+    const cerosPosibles = Math.floor(totalPrimo / repeticionesEnBase);
+
+    if (cerosPosibles < minCeros) minCeros = cerosPosibles;
+  }
+
+  return minCeros;
 };
 
 console.log(zeroes(10, 25));
