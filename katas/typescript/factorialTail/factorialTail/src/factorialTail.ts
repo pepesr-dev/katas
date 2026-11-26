@@ -62,9 +62,9 @@ console.log(zeroes(16, 32));
 //7
 console.log(zeroes(16, 5434));
 //1355
-console.log(zeroes(12, "fdfs"));
+//console.log(zeroes(12, "fdfs"));
 //Error: La base debe ser (10 ó 16) y num solo admite numeros
-console.log(zeroes("fdfs", 32));
+//console.log(zeroes("fdfs", 32));
 //Error: La base debe ser (10 ó 16) y num solo admite numeros
 
 //console.log(zeroes(40, 10));
